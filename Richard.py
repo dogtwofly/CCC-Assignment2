@@ -1,6 +1,7 @@
 import requests
 import couchdb
 import json
+from nltk.corpus import wordnet_ic
 
 import re
 import nltk
@@ -9,9 +10,8 @@ from nltk.corpus import wordnet as wn
 from nltk.stem import WordNetLemmatizer
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-from requests.auth import HTTPDigestAuth
-
-
+nltk.download('wordnet_ic')
+brown_info_content = wordnet_ic.ic('ic-brown.dat')
 # Delete Origin '_id' & '_rev'
 def add_id(tweetdata):
     del saveitem['_rev']
@@ -28,8 +28,9 @@ def sentiment_analysis(content):
 
 
 def profanity_analysis(content):
-    content=re.sub(r'#(\w+)\b',' $1 ',content)
-    content=re.sub(r'@\w+\b','',content)
+    print("______________________________________")
+    print("This is test"+str(content))
+    print("______________________________________")
     contain_profanity=profanity.contains_profanity(content)
 
     return contain_profanity
@@ -42,54 +43,22 @@ def check_crime(word):
     word_n = lemmatizer.lemmatize(word, 'n')
 
     for synset in wn.synsets(word_n,'n'):
-        if max<synset.wup_similarity(wn.synset("crime.n.01")):
-            max=synset.wup_similarity(wn.synset("crime.n.01"))
-
-        if max<synset.wup_similarity(wn.synset("crime.n.02")):
-            max=synset.wup_similarity(wn.synset("crime.n.02"))
-
-        if max<synset.wup_similarity(wn.synset("assault.n.01")):
-            max=synset.wup_similarity(wn.synset("assault.n.01"))
-
-        if max<synset.wup_similarity(wn.synset("robbery.n.01")):
-            max=synset.wup_similarity(wn.synset("robbery.n.01"))
-
-        if max<synset.wup_similarity(wn.synset("fraud.n.01")):
-            max=synset.wup_similarity(wn.synset("fraud.n.01"))
-
-        if max<synset.wup_similarity(wn.synset("arson.n.01")):
-            max=synset.wup_similarity(wn.synset("arson.n.01"))
-
-        if max<synset.wup_similarity(wn.synset("extortion.n.01")):
-            max=synset.wup_similarity(wn.synset("extortion.n.01"))
-
-        if max<synset.wup_similarity(wn.synset("larceny.n.01")):
-            max=synset.wup_similarity(wn.synset("larceny.n.01"))
+        listnoun = ["crime.n.01", "crime.n.02", "assault.n.01", "robbery.n.01", "fraud.n.01", "arson.n.01", "extortion.n.01", "larceny.n.01", "gun.n.01", "weapon.n.01", "blackmail.n.01"]
+        for i in listnoun:
+            if max<synset.lin_similarity(wn.synset(i), brown_info_content):
+                max=synset.lin_similarity(wn.synset(i), brown_info_content)
 
     word_v = lemmatizer.lemmatize(word, 'v')
 
     for synset in wn.synsets(word_v, 'v'):
-        if max < synset.wup_similarity(wn.synset("rob.v.01")):
-            max = synset.wup_similarity(wn.synset("rob.v.01"))
-
-        if max<synset.wup_similarity(wn.synset("assault.v.01")):
-            max=synset.wup_similarity(wn.synset("assault.v.01"))
-
-        if max<synset.wup_similarity(wn.synset("rob.v.01")):
-            max=synset.wup_similarity(wn.synset("rob.v.01"))
-
-        if max<synset.wup_similarity(wn.synset("extort.v.01")):
-            max=synset.wup_similarity(wn.synset("extort.v.01"))
-
-        if max<synset.wup_similarity(wn.synset("murder.v.01")):
-            max=synset.wup_similarity(wn.synset("murder.v.01"))
-
+        listverb = ["rob.v.01", "assault.v.01", "extort.v.01", "murder.v.01", "kidnap.v.01", "blackmail.v.01"]
+        for i in listverb:
+            if max<synset.lin_similarity(wn.synset(i), brown_info_content):
+                max=synset.lin_similarity(wn.synset(i), brown_info_content)
     return max
 
 
 def crime_analysis(content):
-    content = re.sub(r'#(\w+)\b', ' $1 ', content)
-    content = re.sub(r'@\w+\b', '', content)
     tokens = nltk.word_tokenize(content.lower())
 
     max=0.0
@@ -102,14 +71,97 @@ def crime_analysis(content):
         return True
     else:
         return False
+# check if the word is relevant to wrath
+def check_wrath(word):
+    max = 0
+    lemmatizer = WordNetLemmatizer()
+    word_n = lemmatizer.lemmatize(word, 'n')
+    for synset in wn.synsets(word_n,'n'):
+        listnoun = ["outrage.n.01", "madness.n.01", "rage.n.01"]
+        for i in listnoun:
+            if max<synset.lin_similarity(wn.synset(i), brown_info_content):
+                max=synset.lin_similarity(wn.synset(i), brown_info_content)
+
+    word_v = lemmatizer.lemmatize(word, 'v')
+
+    for synset in wn.synsets(word_v, 'v'):
+        listverb = ["rage.v.01", "hate.v.01"]
+        for i in listverb:
+            if max < synset.lin_similarity(wn.synset(i), brown_info_content):
+                max = synset.lin_similarity(wn.synset(i), brown_info_content)
+    return max
+
+    word_a = lemmatizer.lemmatize(word, 'v')
+    for synset in wn.synsets(word_a, 'v'):
+        listadjective = ["angry.a.01", "mad.a.01", "unhappy.a.01"]
+        for i in listadjective:
+            if max < synset.lin_similarity(wn.synset(i), brown_info_content):
+                max = synset.lin_similarity(wn.synset(i), brown_info_content)
+    return max
+
+def wrath_analysis(content):
+    tokens = nltk.word_tokenize(content.lower())
+
+    max = 0.0
+
+    for token in tokens:
+        if max < check_wrath(token):
+            max = check_wrath(token)
+
+    if max > 0.8:
+        return True
+    else:
+        return False
+# check if the word is relevant to lust
+def check_lust(word):
+    max = 0
+    lemmatizer = WordNetLemmatizer()
+    word_n = lemmatizer.lemmatize(word, 'n')
+    for synset in wn.synsets(word_n, 'n'):
+        listnoun = ["sex.n.01", "sex.n.02", "love.n.01", "love.n.02"]
+        for i in listnoun:
+            if max < synset.lin_similarity(wn.synset(i), brown_info_content):
+                max = synset.lin_similarity(wn.synset(i), brown_info_content)
+
+    word_v = lemmatizer.lemmatize(word, 'v')
+
+    for synset in wn.synsets(word_v, 'v'):
+        listverb = ["desire.v.01", "want.v.01", "love.v.01", "love.v.02"]
+        for i in listverb:
+            if max < synset.lin_similarity(wn.synset(i), brown_info_content):
+                max = synset.lin_similarity(wn.synset(i), brown_info_content)
+    return max
+
+    word_a = lemmatizer.lemmatize(word, 'v')
+    for synset in wn.synsets(word_a, 'v'):
+        listadjective = ["sexual.a.01", "sexual.a.02", "sexy.a.01", "sexy.a.02", "jealous.a.01", "jealous.a.02"]
+        for i in listadjective:
+            if max < synset.lin_similarity(wn.synset(i), brown_info_content):
+                max = synset.lin_similarity(wn.synset(i), brown_info_content)
+    return max
+
+def lust_analysis(content):
+    tokens = nltk.word_tokenize(content.lower())
+
+    max = 0.0
+
+    for token in tokens:
+        if max < check_lust(token):
+            max = check_lust(token)
+
+    if max > 0.8:
+        return True
+    else:
+        return False
+
 
 # Remove "http" information in tweet text
-def removehttp (tweetdata):
+def removehttp (tweet):
 
     try:
-        text = tweetdata['extended_tweet']['full_text']
+        text = tweet['extended_tweet']['full_text']
     except:
-        text = tweetdata['text']
+        text = tweet['text']
 
     pattern = re.compile('https://t.co/\w+')
     pat = pattern.findall(text)
@@ -139,8 +191,8 @@ def savetodb(data):
 
 
 # Get Message
-url='http://45.113.232.90/couchdbro/twitter/_design/twitter/_view/geoindex'
-para={'include_docs':'true','reduce':'false','skip':'0','limit':'100'}
+url='http://45.113.232.90/couchdbro/twitter/_design/twitter/_view/summary'
+para={'include_docs':'true','reduce':'false','skip':'0','limit':'100'} #'start_key':'["perth", 2018, 1, 1]', 'end_key':'["perth", 2018, 12, 31]'}
 
 offset = 100
 current = 0
@@ -169,24 +221,41 @@ while (current < 1000000):
         saveitem = add_id(saveitem)
         tweetReal = removehttp(saveitem)
         # print (tweetReal)
-
+        contentText1 = re.sub(r'#(\w+)\b', ' $1 ', tweetReal)
+        contentText = re.sub(r'@\w+\b', '', contentText1)
 
         # Call analysis functions
-        sentiment = sentiment_analysis(tweetReal)
+        sentiment = sentiment_analysis(contentText)
         try:
-            profanity = profanity_analysis(tweetReal)
+            profanity = profanity_analysis(contentText)
         except:
             profanity = False
-        crime = crime_analysis(tweetReal)
+        crime = crime_analysis(contentText)
+        wrath = wrath_analysis(contentText)
+        lust = lust_analysis(contentText)
 
 
         # Update
         saveitem['sentiment'] = sentiment
         saveitem['profanity'] = profanity
-        saveitem['crime'] = crime
+        if sentiment["compound"]<-0.5 and crime:
+            saveitem['crime'] = crime
+        elif not crime:
+            saveitem['crime'] = crime
+
+        if sentiment["neg"]>0 and wrath:
+            saveitem['wrath'] = wrath
+        elif not wrath:
+            saveitem['wrath'] = wrath
+
+        if sentiment["neg"]>0.2 and lust:
+            saveitem['lust'] = lust
+        elif not lust:
+            saveitem['lust'] = lust
+
 
         tweetsave = json.dumps(saveitem)
+        print(tweetsave)
 
-
-        savetodb(saveitem)
+        # savetodb(saveitem)
 
