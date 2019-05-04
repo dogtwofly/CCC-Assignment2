@@ -1,5 +1,5 @@
 ---
-- name: Set proxy: 
+- name: Set proxy
   lineinfile:
     dest: /etc/environment
     line: "{{ item }}"
