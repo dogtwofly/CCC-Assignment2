@@ -1,0 +1,14 @@
+---
+volumes:
+  - device: /dev/vda
+    mountpoint: /var/lib/docker
+  - device: /dev/vdb
+    mountpoint: /data
+
+wp_dir: wordpress
+
+# Wordpress / CouchDB
+database_name: Tweet_data
+database_user: group18
+database_password: group18
+couchdb_root_password: "group18"
