@@ -1,5 +1,6 @@
 import couchdb
 import json
+import time
 
 class tweetServer(couchdb.client.Server):
     def __init__(self, url, port, user, pwd):
@@ -94,8 +95,8 @@ if __name__ == "__main__":
 
     test1.delete("7")
 
-    doc3 = {'_id': '1', 'name': '曾舜晞', 'update': '2'}
-    doc4 = {'_id': '2', 'name': '陈钰琪', 'update': '2'}
+    doc3 = {'_id': '1', 'name': '曾舜晞', 'update': time.time()}
+    doc4 = {'_id': '2', 'name': '陈钰琪', 'update': time.time()}
     print(test1.update(doc3))
     print(test1.update(doc4))
 
