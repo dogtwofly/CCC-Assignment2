@@ -10,10 +10,10 @@
   tags: 'docker'
   become: yes
   apt:
-    name: ['apt-transport-https', 'ca-certificates', 'curl', 'python-setuptools', 'software-properties-common']
+    name: ['apt-transport-https', 'ca-certificates', 'curl', 'python-setuptools','python-pip','software-properties-common']
     state: latest
     install_recommends: no
-    # update_cache: yes
+    update_cache: yes
 
 - name: Add Docker apt repository key
   tags: 'docker'
@@ -26,9 +26,9 @@
   tags: 'docker'
   become: yes
   apt_repository:
-    repo: "deb https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }}"
+    repo: "deb https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable"
     mode: '644'
-    # update_cache: yes
+    update_cache: yes
     state: present
 
 - name: Install docker
@@ -38,7 +38,7 @@
     name: ['docker-ce']
     state: latest
     install_recommends: no
-    # update_cache: yes
+    update_cache: yes
 
 - name: Install docker-compose
   tags: 'docker'
@@ -47,3 +47,4 @@
     name: ['docker-compose']
     version: 1.22.0
     state: present
+   

@@ -3,7 +3,7 @@
   tags: 'volumes'
   become: yes
   apt:
-    name: ['xdfprogs']
+    name: ['xfsprogs']
     state: latest
     install_recommends: no
     update_cache: yes
@@ -17,7 +17,7 @@
   when: item.device is defined
   with_items:
     - "{{ volumes }}"
-
+    
 - name: Checking folders
   tags: 'volumes'
   become: yes
