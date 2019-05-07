@@ -12,3 +12,4 @@
     - role: proxy
     - role: volumes
     - role: wordpress
+    # - role: couchdb    
