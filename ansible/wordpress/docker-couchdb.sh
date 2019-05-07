@@ -12,7 +12,8 @@ docker images -a
 #docker restart couchdb
 #docker rm couchdb
 #docker ps -a
-docker run -e COUCHDB_USER=saaltfiish -e COUCHDB_PASSWORD=huhuahua0124 -p 5984:5984 -d couchdb:local
+docker run --name couchdb -e COUCHDB_USER=saaltfiish -e COUCHDB_PASSWORD=huhuahua0124 -p 5984:5984 -d couchdb:local
+docker ps -a
 sleep 60
 curl -X PUT http://saaltfiish:huhuahua0124@127.0.0.1:5984/_users
 curl -X PUT http://saaltfiish:huhuahua0124@127.0.0.1:5984/_replicator
