@@ -1,23 +1,4 @@
 ---
-
-- git:
-    repo: 'https://github.com/dogtwofly/xanthic.git'
-    dest: ~/test2/
-    clone: no
-    update: no
-
-- git:
-    repo: 'https://github.com/dogtwofly/xanthic.git'
-    dest: ~/assignment2/
-
-- file:
-    path: ~/assignment2/ansible/wordpress/docker-couchdb.sh
-    owner: ubuntu
-    group: ubuntu
-    # when specifying mode using octal numbers, add a leading 0
-    # mode: 0777
-
-
-- name: run docker script
+- name: install couchdb
   shell: /home/ubuntu/assignment2/ansible/wordpress/docker-couchdb.sh >> /home/ubuntu/assignment2/dc.log
   become: yes
