@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>- Wrath Analysis </title>
+
+		<!--  jquery plguin -->
+	    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+		<link href="../static/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+		<link href="../static/css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<script type="text/javascript" src="../static/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+		
+		
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		</script>
+    	<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    	<link href="../static/css/chart.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<!--start slider -->
+	    <link rel="stylesheet" href="../static/css/fwslider.css" media="all">
+		<script src="../static/js/jquery-ui.min.js"></script>
+		<script src="../static/js/css3-mediaqueries.js"></script>
+		<script src="../static/js/fwslider.js"></script>
+		<!--end slider -->
+	
+		<!-- start testimonials -->
+		<!-- da-slider -->
+		<link rel="stylesheet" type="text/css" href="../static/css/slider.css" />
+		<script type="text/javascript" src="../static/js/modernizr.custom.28468.js"></script>
+		<script type="text/javascript" src="../static/js/jquery.cslider.js"></script>
+		<script type="text/javascript">
+			$(function() {
+
+				$('#da-slider').cslider({
+					autoplay : true,
+					bgincrement : 450
+				});
+
+			});
+		</script>
+		<script type="text/javascript">
+			$(function() {
+
+				$('#da-slider1').cslider({
+					autoplay : true,
+					bgincrement : 450
+				});
+
+			});
+		</script>
+		<!-- echart-->
+		<script type="text/javascript" src="../static/js/echarts.js"></script>
+		<script type="text/javascript" src="../static/js/macarons.js"></script>
+</head>
+
+<body>
+<div class="header_bg">
+	<!-- start header -->
+<div class="header_bg">
+	<!-----start-conatiner---->
+		<div class="container">
+			<!-----start-header---->
+			<div class="header">
+					<!----start-top-nav---->
+		      <header id="topnav">
+			        <nav>
+			        		 <ul>
+								<li class="active"><a  href="#home">HOME</a></li>
+								<li><a href="#about" class="scroll">INTRODUCTION</a></li>
+								<li><a href="#portfolio" class="scroll">RESEARCHES</a></li>
+								<li><a href="#team" class="scroll">TEAM</a></li>
+								<li><a href="#reference" class="scroll">REFERENCE</a></li>
+								
+							</ul>
+		        	</nav>
+			         <h1><a href="index.html"><img src="../static/images/logo_1.png" alt=""/></a></h1>
+			        	<a href="#" id="navbtn">Nav Menu</a>
+			       <div class="clearfix"> </div>
+		        </header>
+		         <!----start-top-nav---->
+		    </div>
+		   <!-----start-header---->
+		</div>
+	</div>
+		<script type="text/javascript"  src="../static/js/menu.js"></script>
+</div>
+
+
+<!--    chart    -->
+<div class="content">
+<h1>Analysis of Wrath.</h1>
+<div class="col-md-12">
+	<div id="map"></div>
+    <script>
+// Initialize and add the map
+function initMap() {
+  // The location of Melbourne
+  var Melbourne = {lat: -37.796914, lng: 144.960978};
+  // The map, centered at Melbourne
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: Melbourne});
+  // The marker, positioned at Melbourne
+  var marker = new google.maps.Marker({position: Melbourne, map: map});
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxxG9d9dd5LBIDxiCMPpllcy6e0OjIn6M&callback=initMap">
+    </script>
+</div>
+<div class="col-md-12"><div class="top_pic"><img src="../static/images/wrath_top_pic.jpg" alt=""/></div></div>
+
+	<div class="col-md-7">
+	<h2>Analysis of Wrath.</h2>
+		<div id="chartmain">	
+			<script type="text/javascript">
+			//指定图标的配置和数据
+			var option = {
+				tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            crossStyle: {
+                color: '#999'
+            }
+        }
+    },
+    
+    legend: {
+        data:['蒸发量','降水量','平均温度']
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+            axisPointer: {
+                type: 'shadow'
+            }
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            name: '水量',
+            min: 0,
+            max: 250,
+            interval: 50,
+            axisLabel: {
+                formatter: '{value} ml'
+            }
+        },
+        {
+            type: 'value',
+            name: '温度',
+            min: 0,
+            max: 25,
+            interval: 5,
+            axisLabel: {
+                formatter: '{value} °C'
+            }
+        }
+    ],
+    series: [
+        {
+            name:'蒸发量',
+            type:'bar',
+            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+        },
+        {
+            name:'降水量',
+            type:'bar',
+            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+        },
+        {
+            name:'平均温度',
+            type:'line',
+            yAxisIndex: 1,
+            data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+        }
+    ]
+			};
+			//初始化echarts实例
+			var myChart = echarts.init(document.getElementById('chartmain'),'macarons');
+
+			//使用制定的配置项和数据显示图表
+			myChart.setOption(option);
+			
+			
+			</script>
+			
+		</div>
+			
+	</div>
+	
+	<div class="col-md-5">
+		<div class="side_rt">
+			<h1>#Wrath</h1>
+			
+		<div class="description">
+		<ul>
+			<li><p>This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.This is a text sample.</p></li>
+		</ul>
+		</div>
+		</div>
+	</div>
+	
+
+
+
+</div>
+
+<div class="footer">
+	<div class="col-md-12">
+	<div class="container">
+		<div class="row">
+ 			<div class="col-md-12">	
+				<div class="copy-right">
+					<p>Copyright &copy; 2019. COMP90024 TEAM 18.</p>	
+				</div>	
+			</div>
+		</div>
+   </div>
+</div>
+</div>
+
+</body>
