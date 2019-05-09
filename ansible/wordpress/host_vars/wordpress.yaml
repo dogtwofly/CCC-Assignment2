@@ -13,4 +13,5 @@ docker_proxy_https: /etc/systemd/system/docker.service.d/https-proxy.conf
 database_name: Twitter_data
 database_user: group18
 database_password: group18
-couchdb_root_password: "group18"
+couchdb_root_password: group18
+git_home: ~/assignment2
