@@ -27,11 +27,6 @@ vol_name1: vol_instance1
 vol_name2: vol_instance2
 vol_name3: vol_instance3
 vol_name4: vol_instance4
-#proxy:
-#    - 'http_proxy="http://wwwproxy.unimelb.edu.au:8000"'
-#    - 'https_proxy="http://wwwproxy.unimelb.edu.au:8000"'
-#    - 'ftp_proxy="http://wwwproxy.unimelb.edu.au:8000"'
-#    - 'no_proxy=localhost,127.0.0.1,127.0.1.1,ubuntu'
 vol_size: 60
 instance_image: 394a1b97-a8d3-4593-aab0-8156f0dfeeca #选择服务器上image，这是ubuntu16.04的image id
 instance_key_name: Group18 #所用的key pair

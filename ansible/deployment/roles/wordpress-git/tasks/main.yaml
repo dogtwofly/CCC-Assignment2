@@ -1,0 +1,10 @@
+---
+- name: remove former local git repo
+  file:
+    state: absent
+    path: ~/assignment2
+
+- name: clone git repo
+  git:
+    repo: 'https://github.com/dogtwofly/xanthic.git'
+    dest: ~/assignment2
