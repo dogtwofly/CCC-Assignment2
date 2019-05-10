@@ -72,6 +72,9 @@
     msg: "Instance {{ instance_name4 }} has been created. IP address is {{ os_instance4.openstack.public_v4 }}"
   when: os_instance4.openstack is defined
 
+- name: wait for instances to start
+  pause:
+    minutes: 2
 - name: add hosts
 #  add_host:
 #    name: '{{ os_instance4.openstack.public_v4 }}'
