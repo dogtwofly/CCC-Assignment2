@@ -1,0 +1,49 @@
+---
+- name: change authority
+  raw: sudo chmod 775 /etc/environment
+
+- name: set proxy
+  tags: 'always'
+  become: yes
+  lineinfile:
+    dest: '{{ environment_proxy }}'
+    insertafter: EOF
+    line: '{{ item }}'
+  loop: '{{ proxy }}'
+
+- name: Gather facts of remote host
+  setup:
+    gather_subset: all
+
+- name: Install dependencies
+  tags: always
+  become: yes
+  apt:
+    name: ['apt-transport-https', 'build-essential', 'curl', 'git', 'python-pip', 'python-setuptools', 'python-dev', 'libffi-dev', 'libssl-dev']
+    state: latest
+    install_recommends: no
+    update_cache: yes
+
+- name: Update pip
+  tags: always
+  become: yes
+  pip:
+    name: ['pip']
+    state: latest
+
+# - name: check git repo exists
+- git:
+    repo: 'https://github.com/dogtwofly/xanthic.git'
+    dest: ~/test2/
+    clone: no
+    update: no
+
+- name: remove former local git repo
+  file:
+    state: absent
+    path: ~/assignment2
+
+# - name: clone git repo
+- git:
+    repo: 'https://github.com/dogtwofly/xanthic.git'
+    dest: ~/assignment2

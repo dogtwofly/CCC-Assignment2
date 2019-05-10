@@ -1,0 +1,21 @@
+---
+volumes:
+  - device: /dev/vdb
+    mountpoint: /data
+
+wp_dir: wordpress
+couchdb_dir: /var/lib/coucbdb
+docker_proxy_http: /etc/systemd/system/docker.service.d/http-proxy.conf
+docker_proxy_https: /etc/systemd/system/docker.service.d/https-proxy.conf
+# Wordpress / CouchDB
+proxy:
+    - 'http_proxy="http://wwwproxy.unimelb.edu.au:8000"'
+    - 'https_proxy="http://wwwproxy.unimelb.edu.au:8000"'
+    - 'ftp_proxy="http://wwwproxy.unimelb.edu.au:8000"'
+    - 'no_proxy=localhost,127.0.0.1,127.0.1.1,ubuntu'
+database_name: Twitter_data
+database_user: group18
+database_password: group18
+couchdb_root_password: group18
+environment_proxy: /etc/environment
+git_home: ~/assignment2
