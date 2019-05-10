@@ -7,7 +7,6 @@
     - role: openstack-common
     - role: openstack-images
     - role: openstack-volume
-#    - role: openstack-proxy
     - role: openstack-security-group
     - role: openstack-instances
 
@@ -17,7 +16,7 @@
   gather_facts: True
   pre_tasks:
     - name: 'Install Python' 
-      raw: sudo apt-get install update; sudo apt-get -y install python; sudo mkdir /etc/systemd/system/docker.service.d; sudo apt-get install apache2; sudo apt-get install nodejs
+      raw: sudo apt-get install update; sudo apt-get -y install python; sudo mkdir /etc/systemd/system/docker.service.d
   roles:
     - role: wordpress-common
     - role: wordpress-docker

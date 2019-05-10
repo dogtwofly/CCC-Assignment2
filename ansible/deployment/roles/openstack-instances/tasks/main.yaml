@@ -1,58 +1,58 @@
 ---
 #Create instances on NeCTAR
-#- name: Create an instance1
-#  os_server:
-#    name: '{{ instance_name1 }}'
-#    image: '{{ instance_image }}'
-#    key_name: '{{ instance_key_name }}'
-#    flavor: '{{ instance_flavor }}'
-#    availability_zone: '{{ availability_zone }}'
-#    security_groups: '{{ sg_names }}'
-#    volumes: '{{ vol_name1 }}'
-#    auto_floating_ip: yes
-#    wait: yes
-#    timeout: 600
-#    state: present
-#  register: os_instance1
-#- debug:
-#    msg: "Instance {{ instance_name1 }} has been created. IP address is {{ os_instance1.openstack.public_v4 }}"
-#  when: os_instance1.openstack is defined
-#
-#- name: Create an instance2
-#  os_server:
-#    name: '{{ instance_name2 }}'
-#    image: '{{ instance_image }}'
-#    key_name: '{{ instance_key_name }}'
-#    flavor: '{{ instance_flavor }}'
-#    availability_zone: '{{ availability_zone }}'
-#    security_groups: '{{ sg_names }}'
-#    volumes: '{{ vol_name2 }}'
-#    auto_floating_ip: yes
-#    wait: yes
-#    timeout: 600
-#    state: present
-#  register: os_instance2
-#- debug:
-#    msg: "Instance {{ instance_name2 }} has been created. IP address is {{ os_instance2.openstack.public_v4 }}"
-#  when: os_instance2.openstack is defined
-#
-#- name: Create an instance3
-#  os_server:
-#    name: '{{ instance_name3 }}'
-#    image: '{{ instance_image }}'
-#    key_name: '{{ instance_key_name }}'
-#    flavor: '{{ instance_flavor }}'
-#    availability_zone: '{{ availability_zone }}'
-#    security_groups: '{{ sg_names }}'
-#    volumes: '{{ vol_name3 }}'
-#    auto_floating_ip: yes
-#    wait: yes
-#    timeout: 600
-#    state: present
-#  register: os_instance3
-#- debug:
-#    msg: "Instance {{ instance_name3 }} has been created. IP address is {{ os_instance3.openstack.public_v4 }}"
-#  when: os_instance3.openstack is defined
+- name: Create an instance1
+  os_server:
+    name: '{{ instance_name1 }}'
+    image: '{{ instance_image }}'
+    key_name: '{{ instance_key_name }}'
+    flavor: '{{ instance_flavor }}'
+    availability_zone: '{{ availability_zone }}'
+    security_groups: '{{ sg_names }}'
+    volumes: '{{ vol_name1 }}'
+    auto_floating_ip: yes
+    wait: yes
+    timeout: 600
+    state: present
+  register: os_instance1
+- debug:
+    msg: "Instance {{ instance_name1 }} has been created. IP address is {{ os_instance1.openstack.public_v4 }}"
+  when: os_instance1.openstack is defined
+
+- name: Create an instance2
+  os_server:
+    name: '{{ instance_name2 }}'
+    image: '{{ instance_image }}'
+    key_name: '{{ instance_key_name }}'
+    flavor: '{{ instance_flavor }}'
+    availability_zone: '{{ availability_zone }}'
+    security_groups: '{{ sg_names }}'
+    volumes: '{{ vol_name2 }}'
+    auto_floating_ip: yes
+    wait: yes
+    timeout: 600
+    state: present
+  register: os_instance2
+- debug:
+    msg: "Instance {{ instance_name2 }} has been created. IP address is {{ os_instance2.openstack.public_v4 }}"
+  when: os_instance2.openstack is defined
+
+- name: Create an instance3
+  os_server:
+    name: '{{ instance_name3 }}'
+    image: '{{ instance_image }}'
+    key_name: '{{ instance_key_name }}'
+    flavor: '{{ instance_flavor }}'
+    availability_zone: '{{ availability_zone }}'
+    security_groups: '{{ sg_names }}'
+    volumes: '{{ vol_name3 }}'
+    auto_floating_ip: yes
+    wait: yes
+    timeout: 600
+    state: present
+  register: os_instance3
+- debug:
+    msg: "Instance {{ instance_name3 }} has been created. IP address is {{ os_instance3.openstack.public_v4 }}"
+  when: os_instance3.openstack is defined
 
 - name: Create an instance4
   os_server:
@@ -68,44 +68,43 @@
     timeout: 600
     state: present
   register: os_instance4
+
 - debug:
     msg: "Instance {{ instance_name4 }} has been created. IP address is {{ os_instance4.openstack.public_v4 }}"
   when: os_instance4.openstack is defined
 
-- name: wait for instances to start
-  pause:
-    minutes: 2
-- name: add hosts
-#  add_host:
-#    name: '{{ os_instance4.openstack.public_v4 }}'
-#    groups: common
-#  add_host:
-#    name: '{{ os_instance3.openstack.public_v4 }}'
-#    groups: common
-#  add_host:
-#    name: '{{ os_instance2.openstack.public_v4 }}'
-#    groups: common
-  add_host:
-    name: '{{ os_instance4.openstack.public_v4 }}'
-    groups: common
-#  add_host:
-#    name: '{{ os_instance3.openstack.public_v4 }}'
-#    groups: db
-#  add_host:
-#    name: '{{ os_instance2.openstack.public_v4 }}'
-#    groups: db
-  add_host:
-    name: '{{ os_instance4.openstack.public_v4 }}'
-    groups: db
+- add_host:
+    hostname: '{{ os_instance1.openstack.public_v4 }}'
+    groups: 
+      - common
+      - db
 
-- name: append hosts to host file
+- add_host:
+    hostname: '{{ os_instance2.openstack.public_v4 }}'
+    groups: 
+      - common
+      - db
+
+- add_host:
+    hostname: '{{ os_instance3.openstack.public_v4 }}'
+    groups: 
+      - common
+      - db
+
+- add_host:
+    hostname: '{{ os_instance4.openstack.public_v4 }}'
+    groups: 
+      - common
+
+- name: dump hosts
   blockinfile:
-#    path: /etc/ansible/hosts
-    path: /Users/aragoto/Desktop/hosts
+    path: ~/Desktop/xanthic/ansible/deployment/hostslist
     block: |
       [db]
-      {{ groups['db'] }}
+      {{groups['db']}}
       [common]
-      {{ groups['common']}}
+      {{groups['common']}}
 
-
+- name: wait for instances to start
+  pause:
+    minutes: 3
