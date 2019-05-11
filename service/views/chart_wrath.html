@@ -1,0 +1,357 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>- Wrath Analysis </title>
+
+		<!--  jquery plguin -->
+	    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+		<link href="../static/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+		<link href="../static/css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<script type="text/javascript" src="../static/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+		
+		
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		</script>
+    	<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    	<link href="../static/css/chart.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<!--start slider -->
+	    <link rel="stylesheet" href="../static/css/fwslider.css" media="all">
+		<script src="../static/js/jquery-ui.min.js"></script>
+		<script src="../static/js/css3-mediaqueries.js"></script>
+		<script src="../static/js/fwslider.js"></script>
+		<!--end slider -->
+	
+		<!-- start testimonials -->
+		<!-- da-slider -->
+		<link rel="stylesheet" type="text/css" href="../static/css/slider.css" />
+		<script type="text/javascript" src="../static/js/modernizr.custom.28468.js"></script>
+		<script type="text/javascript" src="../static/js/jquery.cslider.js"></script>
+		<script type="text/javascript">
+			$(function() {
+
+				$('#da-slider').cslider({
+					autoplay : true,
+					bgincrement : 450
+				});
+
+			});
+		</script>
+		<script type="text/javascript">
+			$(function() {
+
+				$('#da-slider1').cslider({
+					autoplay : true,
+					bgincrement : 450
+				});
+
+			});
+		</script>
+		<!-- echart-->
+		<script type="text/javascript" src="../static/js/echarts.js"></script>
+		<script type="text/javascript" src="../static/js/macarons.js"></script>
+</head>
+
+<body>
+<div class="header_bg">
+	<!-- start header -->
+<div class="header_bg">
+	<!-----start-conatiner---->
+		<div class="container">
+			<!-----start-header---->
+			<div class="header">
+					<!----start-top-nav---->
+		      <header id="topnav">
+			        <nav>
+			        		 <ul>
+								<li class="active"><a  href="#home">HOME</a></li>
+								<li><a href="#about" class="scroll">INTRODUCTION</a></li>
+								<li><a href="#portfolio" class="scroll">RESEARCHES</a></li>
+								<li><a href="#team" class="scroll">TEAM</a></li>
+															
+							</ul>
+		        	</nav>
+			         <a href="index.html"><h1><img src="../static/images/logo_1.png" alt=""/></h1></a>
+			        	<a href="#" id="navbtn">Nav Menu</a>
+			       <div class="clearfix"> </div>
+		        </header>
+		         <!----start-top-nav---->
+		    </div>
+		   <!-----start-header---->
+		</div>
+	</div>
+		<script type="text/javascript"  src="../static/js/menu.js"></script>
+</div>
+
+
+<!--    chart    -->
+<div class="content">
+<h1>Analysis of Wrath.</h1>
+<div class="col-md-12">
+	<div id="map"></div>
+        <script>
+
+      // This example displays a marker at the center of Australia.
+      // When the user clicks the marker, an info window opens.
+
+      function initMap() {
+        var Melbourne = {lat: -37.796914, lng: 144.960978};
+		var Sydney = {lat: -33, lng: 151.2};
+		var Perth = {lat:-32.1, lng:116.2};
+		var Brisbane = {lat:-27.5, lng:152.4};
+		var Canberra = {lat:-35.48, lng:148.99};
+		var Adelaide = {lat:-35.35, lng:138.44};
+		
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 5,
+          center: Melbourne
+        });
+
+        var contentString_Melbourne = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h2 id="firstHeading" class="firstHeading">Melbourne</h2>'+
+            '<div id="bodyContent">'+
+            '<p style="font-size:1em">#WRATH:<b></b></p>'+
+			'<p style="font-size:2em">216(36.0%)<b></b></p>'+
+            '</div>'+
+            '</div>';
+			
+		 var contentString_Sydney =  '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h2 id="firstHeading" class="firstHeading">Sydney</h2>'+
+            '<div id="bodyContent">'+
+            '<p style="font-size:1em">#WRATH:<b></b></p>'+
+			'<p style="font-size:2em">210(35.0%)<b></b></p>'+
+            '</div>'+
+            '</div>';
+		
+		var contentString_Perth =  '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h2 id="firstHeading" class="firstHeading">Perth</h2>'+
+            '<div id="bodyContent">'+
+            '<p style="font-size:1em">#WRATH:<b></b></p>'+
+			'<p style="font-size:2em">41(6.8%)<b></b></p>'+
+            '</div>'+
+            '</div>';
+			
+		var contentString_Brisbane =  '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h2 id="firstHeading" class="firstHeading">Brisbane</h2>'+
+            '<div id="bodyContent">'+
+            '<p style="font-size:1em">#WRATH:<b></b></p>'+
+			'<p style="font-size:2em">68(11.3%)<b></b></p>'+
+            '</div>'+
+            '</div>';
+		
+		var contentString_Canberra =  '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h2 id="firstHeading" class="firstHeading">Canberra</h2>'+
+            '<div id="bodyContent">'+
+            '<p style="font-size:1em">#WRATH:<b></b></p>'+
+			'<p style="font-size:2em">10(1.7%)<b></b></p>'+
+            '</div>'+
+            '</div>';
+			
+		var contentString_Adelaide =  '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h2 id="firstHeading" class="firstHeading">Adelaide</h2>'+
+            '<div id="bodyContent">'+
+            '<p style="font-size:1em">#WRATH:<b></b></p>'+
+			'<p style="font-size:2em">55(9.2%)<b></b></p>'+
+            '</div>'+
+            '</div>';
+
+        var infowindow_Melbourne = new google.maps.InfoWindow({
+          content: contentString_Melbourne
+        });
+		
+        var marker_Melbourne = new google.maps.Marker({
+          position: Melbourne,
+          map: map,
+          title: 'Melbourne'
+        });
+        marker_Melbourne.addListener('mouseover', function() {
+          infowindow_Melbourne.open(map, marker_Melbourne);
+        });
+		
+		//SYDNEY
+		var infowindow_Sydney = new google.maps.InfoWindow({
+          content: contentString_Sydney
+        });
+
+        var marker_Sydney = new google.maps.Marker({
+          position: Sydney,
+          map: map,
+          title: 'Sydney'
+        });
+        marker_Sydney.addListener('mouseover', function() {
+          infowindow_Sydney.open(map, marker_Sydney);
+        });
+		//PERTH
+		var infowindow_Perth = new google.maps.InfoWindow({
+          content: contentString_Perth
+        });
+		
+        var marker_Perth = new google.maps.Marker({
+          position: Perth,
+          map: map,
+          title: 'Perth'
+        });
+        marker_Perth.addListener('mouseover', function() {
+          infowindow_Perth.open(map, marker_Perth);
+        });
+		
+		//blsb
+		 var infowindow_Brisbane = new google.maps.InfoWindow({
+          content: contentString_Brisbane
+        });
+		
+        var marker_Brisbane = new google.maps.Marker({
+          position: Brisbane,
+          map: map,
+          title: 'Perth'
+        });
+        marker_Brisbane.addListener('mouseover', function() {
+          infowindow_Brisbane.open(map, marker_Brisbane);
+        });
+		
+		//kpl
+		var infowindow_Canberra = new google.maps.InfoWindow({
+          content: contentString_Canberra
+        });
+		
+
+        var marker_Canberra = new google.maps.Marker({
+          position: Canberra,
+          map: map,
+          title: 'Canberra'
+        });
+        marker_Canberra.addListener('mouseover', function() {
+          infowindow_Canberra.open(map, marker_Canberra);
+        });
+		//ad
+		        var infowindow_Adelaide = new google.maps.InfoWindow({
+          content: contentString_Adelaide
+        });
+		
+
+        var marker_Adelaide = new google.maps.Marker({
+          position: Adelaide,
+          map: map,
+          title: 'Adelaide'
+        });
+        marker_Adelaide.addListener('mouseover', function() {
+          infowindow_Adelaide.open(map, marker_Adelaide);
+        });
+      }
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxxG9d9dd5LBIDxiCMPpllcy6e0OjIn6M&callback=initMap">
+    </script>
+</div>
+<div class="col-md-12"><div class="top_pic"><img src="../static/images/wrath_top_pic.jpg" alt=""/></div></div>
+
+	<div id="jz_main",class="col-md-7">
+	<h2>Analysis of Wrath.</h2>
+		<div id="chartmain">	
+			<script type="text/javascript">
+			
+			var option = {
+				   color: ['#f3c1c6'],
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            
+            type : 'shadow'        
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '3%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'category',
+            data : ['Melbourne', 'Sydney', 'Perth', 'Brisbane', 'Canberra', 'Adelaide'],
+			
+            axisTick: {
+                alignWithLabel: true
+            }
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'#WRATH',
+            type:'bar',
+            barWidth: '60%',
+            data:[216, 210, 41, 68, 10, 55]
+        }
+    ]
+			};
+			
+			var myChart = echarts.init(document.getElementById('chartmain'),'macarons');
+
+			
+			myChart.setOption(option);
+			
+			
+			</script>
+			
+		</div>
+			
+	</div>
+	
+	<div id="jz_main",class="col-md-10">
+		<div class="side_rt">
+			<h1>#Wrath</h1>
+			
+		<div class="description">
+		<ul>
+			<li><p><span style="font-size:1.5em">Wrath</span> is an intense emotional state. It involves a strong uncomfortable and hostile response to a perceived provocation, hurt or threat.</p></li>
+			<li><p><span style="font-size:1.5em">We</span> filtered the tweets again by using sentiment function to improve the accuracy of the data. For instance, if a tweet is ‘I shoot a balloon.’ Although it contains the word shoot which have the correlation with crime, but the sentiment of this tweet is not negative. In this case, we do not consider this tweet is related with crime. Similarly, if a tweet is ‘He pretends to be angry.’, it will not considered to be related to anger.</p></li>
+		</ul>
+		</div>
+		</div>
+	</div>
+	
+
+
+
+</div>
+
+<div class="footer">
+	<div class="col-md-12">
+	<div class="container">
+		<div class="row">
+ 			<div class="col-md-12">	
+				<div class="copy-right">
+					<p>Copyright &copy; 2019. COMP90024 TEAM 18.</p>	
+				</div>	
+			</div>
+		</div>
+   </div>
+</div>
+</div>
+
+</body>
