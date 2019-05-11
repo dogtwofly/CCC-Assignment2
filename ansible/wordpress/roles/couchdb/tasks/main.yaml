@@ -1,0 +1,4 @@
+---
+- name: install couchdb
+  shell: /home/ubuntu/assignment2/ansible/wordpress/docker-couchdb.sh >> /home/ubuntu/assignment2/dc.log
+  become: yes

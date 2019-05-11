@@ -1,0 +1,23 @@
+version: '3.6'
+
+services:
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8000:8000
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: {{ database_user }}
+      WORDPRESS_DB_PASSWORD: {{ database_password }}
+      WORDPRESS_DB_NAME: {{ database_name }}
+  db:
+    image: couchdb:2.3.1
+    restart: always
+    environment:
+      COUCHDB_DATABASE: {{ database_name }}
+      COUCHDB_USER: {{ database_user }}
+      COUCHDB_PASSWORD: {{ database_password }}
+      COUCHDB_ROOT_PASSWORD: {{ couchdb_root_password }}
+    volumes:
+      - {{ couchdb_dir }}:/var/lib/couchdb

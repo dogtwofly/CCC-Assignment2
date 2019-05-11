@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  vars_files: 
+    - host_vars/nectar.yaml
+  gather_facts: true
+  roles: 
+    - role: openstack-common
+    - role: openstack-images
+    - role: openstack-volume
+    - role: openstack-security-group
+    - role: openstack-instances
+
+- hosts: common
+  vars_files:
+    - host_vars/wordpress.yaml
+  gather_facts: True
+  pre_tasks:
+    - name: 'Install Python' 
+      raw: sudo apt-get install update; sudo apt-get -y install python; sudo mkdir /etc/systemd/system/docker.service.d
+  roles:
+    - role: wordpress-common
+    - role: wordpress-docker
+    - role: wordpress-proxy
+    - role: wordpress-volumes
+    - role: wordpress-wordpress
+#    - role: wordpress-git
+- hosts: db
+  roles:
+    - role: wordpress-couchdb

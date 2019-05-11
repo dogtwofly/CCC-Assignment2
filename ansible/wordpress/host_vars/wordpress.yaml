@@ -1,0 +1,17 @@
+---
+volumes:
+#  - device: /dev/vda1
+#    mountpoint: /var/lib/docker
+  - device: /dev/vdb
+    mountpoint: /data
+
+wp_dir: wordpress
+couchdb_dir: /var/lib/coucbdb
+docker_proxy_http: /etc/systemd/system/docker.service.d/http-proxy.conf
+docker_proxy_https: /etc/systemd/system/docker.service.d/https-proxy.conf
+# Wordpress / CouchDB
+database_name: Twitter_data
+database_user: group18
+database_password: group18
+couchdb_root_password: group18
+git_home: ~/assignment2

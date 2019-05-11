@@ -1,0 +1,15 @@
+---
+- name: set docker-http-proxy
+  become: yes
+  copy:
+    dest: '{{ docker_proxy_http }}'
+    content: "[Service]\nEnvironment=\"HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000\""
+
+- name: set docker-https-proxy
+  become: yes
+  copy:
+    dest: '{{ docker_proxy_https }}'
+    content: "[Service]\nEnvironment=\"HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000\""
+
+- name: restart docker
+  raw: sudo systemctl daemon-reload; sudo systemctl restart docker

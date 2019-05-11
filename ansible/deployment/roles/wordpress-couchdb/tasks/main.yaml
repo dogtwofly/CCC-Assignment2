@@ -1,0 +1,4 @@
+---
+- name: install couchdb
+  shell: /home/ubuntu/docker-couchdb.sh
+  become: yes

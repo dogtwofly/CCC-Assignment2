@@ -1,0 +1,57 @@
+---
+- name: change authority
+  raw: sudo chmod 775 /etc/environment
+
+- name: set proxy
+  tags: always
+  become: yes
+  lineinfile:
+    dest: '{{ environment_proxy }}'
+    insertafter: EOF
+    line: '{{ item }}'
+  loop: '{{ proxy }}'
+  
+- name: Install a list of packages
+  tags: always
+  become: yes
+  apt:
+    name: ['apache2', 'nodejs']
+    state: latest
+    install_recommends: no
+    update_cache: yes
+
+- name: Gather facts of remote host
+  setup:
+    gather_subset: all
+
+- name: Install dependencies
+  tags: always
+  become: yes
+  apt:
+    name: ['apt-transport-https', 'build-essential', 'curl', 'git', 'python-pip', 'python-setuptools', 'python-dev', 'libffi-dev', 'libssl-dev']
+    state: latest
+    install_recommends: no
+    update_cache: yes
+
+- name: Update pip
+  tags: always
+  become: yes
+  pip:
+    name: ['pip']
+    state: latest
+
+- name: send hostslist to remote
+  copy:
+    src: ~/Desktop/xanthic/ansible/deployment/hostslist
+    dest: /home/ubuntu/
+    owner: ubuntu
+    group: ubuntu
+    mode: 0744
+
+- name: send docker-couchdb to remote
+  copy:
+    src: ~/Desktop/xanthic/ansible/deployment/docker-couchdb.sh
+    dest: /home/ubuntu/
+    owner: ubuntu
+    group: ubuntu
+    mode: 0744
