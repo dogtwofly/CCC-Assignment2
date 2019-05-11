@@ -78,18 +78,21 @@
     groups: 
       - common
       - db
+      - master
 
 - add_host:
     hostname: '{{ os_instance2.openstack.public_v4 }}'
     groups: 
       - common
       - db
+      - slave
 
 - add_host:
     hostname: '{{ os_instance3.openstack.public_v4 }}'
     groups: 
       - common
       - db
+      - slave
 
 - add_host:
     hostname: '{{ os_instance4.openstack.public_v4 }}'
@@ -107,4 +110,4 @@
 
 - name: wait for instances to start
   pause:
-    minutes: 3
+    minutes: 4
