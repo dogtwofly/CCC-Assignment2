@@ -15,7 +15,7 @@
   tags: always
   become: yes
   apt:
-    name: ['apache2', 'nodejs','git']
+    name: ['apache2', 'nodejs', 'git']
     state: latest
     install_recommends: no
     update_cache: yes

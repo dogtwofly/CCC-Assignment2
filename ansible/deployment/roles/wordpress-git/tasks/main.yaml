@@ -2,9 +2,12 @@
 - name: remove former local git repo
   file:
     state: absent
-    path: ~/assignment2
+    path: ~/xanthic
+
+#- name: clone git repo
+#  git:
+#    repo: 'https://github.com/dogtwofly/xanthic.git'
+#    dest: ~/xanthic
 
 - name: clone git repo
-  git:
-    repo: 'https://github.com/dogtwofly/xanthic.git'
-    dest: ~/assignment2
+  raw: git clone https://github.com/dogtwofly/xanthic.git
