@@ -1,7 +1,5 @@
 import re
 import couchdb
-import json
-
 
 line = []
 with open('/home/ubuntu/hostslist', 'r+') as f:
@@ -21,59 +19,23 @@ masteraddress = "http://saaltfiish:huhuahua0124@"+str(master)+":5984/"
 salveaddress1 = "http://saaltfiish:huhuahua0124@"+str(slave1)+":5984/"
 salveaddress2 = "http://saaltfiish:huhuahua0124@"+str(slave2)+":5984/"
 
-save={
-  "_id": "829c9efbc7c367b0f927fa799100099a",
-  "user_ctx": {
-    "name": "saaltfiish",
-    "roles": [
-      "_admin",
-      "_reader",
-      "_writer"
-    ]
-  },
-  "source": {
-    "url": "http://localhost:5984/source",
-    "headers": {
-      "Authorization": "Basic c2FhbHRmaWlzaDpodWh1YWh1YTAxMjQ="
-    }
-  },
-  "target": {
-    "url": "http://{slave}:5984/source_copy",
-    "headers": {
-      "Authorization": "Basic c2FhbHRmaWlzaDpodWh1YWh1YTAxMjQ="
-    }
-  },
-  "create_target": True,
-  "continuous": True,
-  "owner": "saaltfiish"
-}
-
-save['source']['url']=masteraddress
-# print(save['source']['url'])
-save['target']['url']=salveaddress1
-
 couch = couchdb.Server(masteraddress)
+couch1 = couchdb.Server(salveaddress1)
+couch2 = couchdb.Server(salveaddress2)
+db = couch['brandnew']
 try:
-    db = couch.create('_replicator')  # create db table
+    couch1.create('brandnew_copy1')
 except:
-    db = couch['_replicator']
-
+    db1 = couch1['brandnew_copy1']
 try:
-    db.save(json.loads(save.encode('utf-8')))
+    couch2.create('brandnew_copy2')
 except:
-    pass
-
-save["_id"] = "829c9efbc7c367b0f927fa799101123a"
-save['target']['url']=salveaddress2
-try:
-    db = couch.create('_replicator')  # create db table
-except:
-    db = couch['_replicator']
-
-try:
-    db.save(json.loads(save.encode('utf-8')))
-except:
-    pass
+    db2 = couch2['brandnew_copy2']
+database = masteraddress+"brandnew"
+subdatabase1 = salveaddress1+ "brandnew_copy1"
+subdatabase2 = salveaddress2+ "brandnew_copy2"
+couch.replicate(database, subdatabase1, coutinous=True)
+couch.replicate(database, subdatabase2, coutinous=True)
 
 
 
