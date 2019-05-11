@@ -110,4 +110,4 @@
 
 - name: wait for instances to start
   pause:
-    minutes: 4
+    minutes: 6

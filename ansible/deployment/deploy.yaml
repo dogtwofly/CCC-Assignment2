@@ -23,7 +23,7 @@
     - role: wordpress-proxy
     - role: wordpress-volumes
     - role: wordpress-wordpress
-    - role: wordpress-git
+#    - role: wordpress-git
 - hosts: db
   roles:
     - role: wordpress-couchdb
