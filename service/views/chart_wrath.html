@@ -328,8 +328,12 @@
 			
 		<div class="description">
 		<ul>
-			<li><p><span style="font-size:1.5em">Wrath</span> is an intense emotional state. It involves a strong uncomfortable and hostile response to a perceived provocation, hurt or threat.</p></li>
-			<li><p><span style="font-size:1.5em">We</span> filtered the tweets again by using sentiment function to improve the accuracy of the data. For instance, if a tweet is ‘I shoot a balloon.’ Although it contains the word shoot which have the correlation with crime, but the sentiment of this tweet is not negative. In this case, we do not consider this tweet is related with crime. Similarly, if a tweet is ‘He pretends to be angry.’, it will not considered to be related to anger.</p></li>
+			<li><p>Wrath is an intense emotional state. It involves a strong uncomfortable and hostile response to a perceived provocation, hurt or threat.</p></li>
+			<li><p><span style="font-size:1.5em">Wrath</span> will be categorized with the similar tricks. Each word in the tweets is lemmatized and be compared. The key words are:</p></li>
+			<li><p><span style="font-size:1.5em">1.</span> Noun: ”outrage.n.01", "madness.n.01", "rage.n.01"</p></li>
+			<li><p><span style="font-size:1.5em">2.</span> Verb: "rage.v.01", "hate.v.01"</p></li>
+			<li><p><span style="font-size:1.5em">3.</span> Adjective: "angry.a.01", "mad.a.01", "unhappy.a.01”</p></li>
+			<li><p>The decision boundary is 0.8 as the same as the lust classifier, and the additional help from the sentimental score is very useful to predict the wrath sins more precisely and accurately. Because the sins must intuitively be in relation to the negative emotions.</p></li>
 		</ul>
 		</div>
 		</div>
