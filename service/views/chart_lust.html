@@ -159,7 +159,7 @@ var contentString_Melbourne = '<div id="content">'+
             '<h2 id="firstHeading" class="firstHeading">Canberra</h2>'+
             '<div id="bodyContent">'+
             '<p style="font-size:1em">#LUST:<b></b></p>'+
-			'<p style="font-size:2em">10(2.4%)<b></b></p>'+
+			'<p style="font-size:2em">39(2.4%)<b></b></p>'+
             '</div>'+
             '</div>';
 			
@@ -331,8 +331,12 @@ var contentString_Melbourne = '<div id="content">'+
 			
 		<div class="description">
 		<ul>
-			<li><p><span style="font-size:1.5em">Lust</span> is a psychological force producing intense wanting or longing for an object, or circumstance fulfilling the emotion.</p></li>
-			<li><p><span style="font-size:1.5em">Tweets</span> will be divided into six words ‘I’, ‘want’, ‘to’, ‘fall’, ‘in’, ‘love’, these words will be divided into two groups one is noun, the other is verb. For check_wrath, all of the noun in this tweet will compare the key words that we set in the wrath, which is ‘outrage’, ‘madness’, ‘rage’. For the verb in this tweet will compare the verbs in that we set in this function, which is ’rage’, ‘hate’. If the similarity of two words equal and greater than 0.8, we will put this tweet in wrath. Otherwise, the check_lust function will continue to compare the similarity of the tweet and lust.</p></li>
+			<li><p>Lust is a psychological force producing intense wanting or longing for an object, or circumstance fulfilling the emotion.</p></li>
+			<li><p><span style="font-size:1.5em">Lust</span> will be analyzed according to its word position and be lemmatized. Then it is compared with the key word set in the list. 
+<li><p><span style="font-size:1.5em">1.</span> Noun: “sex.n.01", "sex.n.02", "love.n.01", "love.n.02"</p></li>
+<li><p><span style="font-size:1.5em">2.</span> Verb: “desire.v.01", "want.v.01", "love.v.01"</p></li>
+<li><p><span style="font-size:1.5em">3.</span> Adjective: "sexual.a.01", "sexual.a.02", "sexy.a.01", "sexy.a.02", "jealous.a.01", "jealous.a.02</p></li>
+<li><p>For the tweet text, the maximum score will be kept in record and compared with our decision criterion, which is 0.8. If it exceeds 0.8, so we can say that there is the lust meaning appear in the tweets. Furthermore, the sentiment will give more support to classify the lust sins. If it returns negative emotional sense and score larger than 0.8, it will be labeled as lust.</p></li>
 		</ul>
 		</div>
 		</div>
