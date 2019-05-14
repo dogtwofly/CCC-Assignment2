@@ -107,6 +107,10 @@
       {{groups['db']}}
       [common]
       {{groups['common']}}
+      [master]
+      {{groups['master']}}
+      [slave]
+      {{groups['slave']}}
 
 - name: wait for instances to start
   pause:
